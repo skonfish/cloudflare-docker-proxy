@@ -7,17 +7,17 @@ const dockerHub = "https://registry-1.docker.io";
 
 const routes = {
   // production
-  "docker.libcuda.so": dockerHub,
-  "quay.libcuda.so": "https://quay.io",
-  "gcr.libcuda.so": "https://gcr.io",
-  "k8s-gcr.libcuda.so": "https://k8s.gcr.io",
-  "k8s.libcuda.so": "https://registry.k8s.io",
-  "ghcr.libcuda.so": "https://ghcr.io",
-  "cloudsmith.libcuda.so": "https://docker.cloudsmith.io",
-  "ecr.libcuda.so": "https://public.ecr.aws",
+  "docker.tccc.fun": dockerHub,
+  "quay.tccc.fun": "https://quay.io",
+  "gcr.tccc.fun": "https://gcr.io",
+  "k8s-gcr.tccc.fun": "https://k8s.gcr.io",
+  "k8s.tccc.fun": "https://registry.k8s.io",
+  "ghcr.tccc.fun": "https://ghcr.io",
+  "cloudsmith.tccc.fun": "https://docker.cloudsmith.io",
+  "ecr.tccc.fun": "https://public.ecr.aws",
 
   // staging
-  "docker-staging.libcuda.so": dockerHub,
+  "docker-staging.tccc.fun": dockerHub,
 };
 
 function routeByHosts(host) {
@@ -152,4 +152,15 @@ async function fetchToken(wwwAuthenticate, scope, authorization) {
     headers.set("Authorization", authorization);
   }
   return await fetch(url, { method: "GET", headers: headers });
+}
+import DOCS from './help.html'
+ 
+// return docs
+if (url.pathname === "/") {
+  return new Response(DOCS, {
+    status: 200,
+    headers: {
+      "content-type": "text/html"
+    }
+  });
 }
